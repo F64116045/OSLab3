@@ -44,31 +44,29 @@ void data_processing(void){
     }   
 }
 
-void *thread1(void *arg){
-
-    /*YOUR CODE HERE*/
-    for(int i=0; i<matrix_row_x; i++){
-        for(int j=0; j<matrix_col_y; j++){
-            for(int k=0; k<matrix_row_y/2; k++){
-
-            }      
+void *thread1(void *arg) {
+    for (int i = 0; i < matrix_row_x; i++) {
+        for (int j = 0; j < matrix_col_y; j++) {
+            for (int k = 0; k < matrix_row_y / 2; k++) {
+                pthread_spin_lock(&lock);
+                z[i][j] += x[i][k] * y[k][j];
+                pthread_spin_unlock(&lock);
+            }
         }
     }
-    /****************/
     return NULL;
 }
 
 void *thread2(void *arg) {
-
-    /*YOUR CODE HERE*/
-    for(int i=0; i<matrix_row_x; i++){
-        for(int j=0; j<matrix_col_y; j++){
-            for(int k=matrix_row_y/2; k<matrix_row_y; k++){
-
-            }     
+    for (int i = 0; i < matrix_row_x; i++) {
+        for (int j = 0; j < matrix_col_y; j++) {
+            for (int k = matrix_row_y / 2; k < matrix_row_y; k++) {
+                pthread_spin_lock(&lock);
+                z[i][j] += x[i][k] * y[k][j];
+                pthread_spin_unlock(&lock);
+            }
         }
-    } 
-    /****************/
+    }
     return NULL;
 }
 
@@ -98,7 +96,6 @@ int main() {
     pthread_join(t1, NULL);
     pthread_join(t2, NULL);
     pthread_spin_destroy(&lock);
-
     //Write output matrix into file.
     for(int i=0; i<matrix_row_x; i++){
         for(int j=0; j<matrix_col_y; j++){

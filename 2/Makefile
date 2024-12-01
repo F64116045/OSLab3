@@ -13,7 +13,7 @@ judge2:
 	done
 	@./judge.out 2
 	@rm -f 2.out
-	@rm -f 2.txt
+#	@rm -f 2.txt
 
 diff:
 	@gcc -o 2.out 2_1.c

@@ -51,9 +51,10 @@ void *thread(void *arg){
             res = 0;
             for(int k=0; k<matrix_row_y; k++){
                 /*YOUR CODE HERE*/
-
+                res += x[i][k] * y[k][j];
                 /****************/
             }
+            printf("%d\n", res);
             fprintf(fptr3, "%d ", res);
             if(j==matrix_col_y-1) fprintf(fptr3, "\n");        
         }
