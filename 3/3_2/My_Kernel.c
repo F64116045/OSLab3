@@ -23,7 +23,7 @@ static ssize_t Mywrite(struct file *fileptr, const char __user *ubuf, size_t buf
         return -EFAULT;
     }
     
-    //移動到Thread X say hello後面(p)
+    //移動到Thread X say hello後面 (p)
     char *p = buf + buffer_len;
     int remaining = BUFSIZE;
     //把thread資訊放進去
