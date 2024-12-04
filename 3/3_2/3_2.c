@@ -58,6 +58,7 @@ void *thread1(void *arg){
         for(int j=0; j<matrix_col_y; j++){
             for(int k=0; k<matrix_row_y; k++){
                 z[i][j] += x[i][k] * y[k][j];
+                //printf("WTF");
             }      
         }
     }
@@ -73,7 +74,14 @@ void *thread1(void *arg){
 
     /*YOUR CODE HERE*/
     /* Hint: Write data into proc file.*/
+    FILE *proc = fopen("/proc/Mythread_info", "w");
+    if (proc == NULL) {
+        perror("Failed to open /proc/Mythread_info for writing");
+        return NULL;
+    }
 
+    fprintf(proc, "%s\n", data);
+    fclose(proc);
     /****************/ 
 
     char buffer[50]; 
@@ -96,7 +104,14 @@ void *thread2(void *arg){
     }
     
     /*YOUR CODE HERE*/
-    /* Hint: Write data into proc file.*/
+    FILE *proc = fopen("/proc/Mythread_info", "w");
+    if (proc == NULL) {
+        perror("Failed to open /proc/Mythread_info for writing");
+        return NULL;
+    }
+
+    fprintf(proc, "%s\n", data);
+    fclose(proc);
 
     /****************/   
 
